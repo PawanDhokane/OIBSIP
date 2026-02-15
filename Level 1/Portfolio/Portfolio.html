@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawan Dhokane - Full stack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d2d2d;
+            --accent: #d4a574;
+            --light: #f8f6f3;
+            --gray: #8c8c8c;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--light);
+            color: var(--primary);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            background: rgba(248, 246, 243, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(45, 45, 45, 0.1);
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 12rem 5% 8rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        
+        .hero-text {
+            animation: fadeInLeft 1s ease-out 0.3s backwards;
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .hero-greeting {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+        
+        .hero-cta:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(45, 45, 45, 0.2);
+        }
+        
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s ease-out 0.6s backwards;
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .image-wrapper {
+            position: relative;
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, #d4a574 0%, #c9985e 100%);
+            overflow: hidden;
+        }
+        
+        .image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent);
+            z-index: -1;
+        }
+        
+        .placeholder-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--white);
+            opacity: 0.3;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+        
+        .section-header {
+            max-width: 1200px;
+            margin: 0 auto 5rem;
+        }
+        
+        .section-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+        
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 5rem;
+        }
+        
+        .about-text {
+            animation: fadeIn 1s ease-out backwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+        }
+        
+        .skills {
+            animation: fadeIn 1s ease-out 0.3s backwards;
+        }
+        
+        .skills h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(45, 45, 45, 0.1);
+            color: var(--gray);
+            font-weight: 400;
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            padding: 6rem 5%;
+            background: var(--light);
+        }
+        
+        .portfolio-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+        
+        .portfolio-item {
+            background: var(--white);
+            overflow: hidden;
+            transition: transform 0.4s;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+        
+        .portfolio-item:nth-child(1) { animation-delay: 0.2s; }
+        .portfolio-item:nth-child(2) { animation-delay: 0.4s; }
+        .portfolio-item:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(45, 45, 45, 0.15);
+        }
+        
+        .portfolio-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, #e8e6e3 0%, #d4d2cf 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(45, 45, 45, 0.2);
+        }
+        
+        .portfolio-content {
+            padding: 2rem;
+        }
+        
+        .portfolio-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+        
+        .portfolio-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .portfolio-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+        
+        .portfolio-link:hover {
+            gap: 1rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 6rem 5%;
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .contact .section-label {
+            color: var(--accent);
+        }
+        
+        .contact .section-title {
+            color: var(--white);
+        }
+        
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+        
+        .contact-info {
+            animation: fadeInLeft 1s ease-out backwards;
+        }
+        
+        .contact-info p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+        
+        .contact-details {
+            list-style: none;
+        }
+        
+        .contact-details li {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .contact-details strong {
+            display: block;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .contact-details a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-details a:hover {
+            color: var(--accent);
+        }
+        
+        .resume-download {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .resume-download:hover {
+            background: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3);
+        }
+        
+        .social-links {
+            animation: fadeInRight 1s ease-out 0.3s backwards;
+        }
+        
+        .social-links h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .social-item {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+        
+        .social-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .social-item .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .social-item span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            background: #1a1a1a;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
+        
+        footer p {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero,
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-name">Pawan Dhokane</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-text">
+            <div class="hero-greeting">Hello, I'm Pawan</div>
+            <h1>Full stack developer and Programmer</h1>
+            <p class="hero-description">I create performance focused applications using C++ , Python and MERN stack.</p>
+            <a href="#portfolio" class="hero-cta">View My Work</a>
+        </div>
+        <div class="hero-image">
+            <div class="image-wrapper">
+                <div class="placeholder-image">
+                    <img src="portf11.jpg" alt="" srcset="" style="height: 100%; object-fit: cover; width: 100%;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="section-header">
+            <div class="section-label">About Me</div>
+            <h2 class="section-title">Passion Meets Purpose</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I am a Computer Science student focused on mastering strong fundamentals in C++, data structures, and backend systems.I believe in building real skills through consistent execution and practical projects.</p>
+                <p> I completed my internship at ShadowFox and actively work on strengthening my portfolio with meaningful applications.
+        My current focus includes Flask backend development, AI/ML fundamentals, and preparation for competitive programs like Google Summer of Code.</p>
+                <p>When I'm not coding, you'll find me exploring new design trends, contributing to open-source projects, or sharing knowledge with the developer community through writing and speaking engagements.</p>
+            </div>
+            <div class="skills">
+                <h3>Core Skills</h3>
+                <ul class="skill-list">
+                    <li>Frontend Development</li>
+                    <li> Data Structures</li>
+                    <li>React</li>
+                    <li>JavaScript</li>
+                    <li>Responsive Design</li>
+                    <li>CSS/HTML</li>
+                    <li>Node.js / Express.js</li>
+                    <li>API Integration</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <div class="section-header">
+            <div class="section-label">Portfolio</div>
+            <h2 class="section-title">Selected Works</h2>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-image"><img src="https://www.servcorp.co.uk/media/34561/e-commerce-img.jpeg?format=webp&quality=70&width=688" alt="" style="object-fit: cover; height: 100%;" srcset=""></div>
+                <div class="portfolio-content">
+                    <h3>E-Commerce Platform</h3>
+                    <p>A modern shopping experience with seamless checkout, real-time inventory, and personalized recommendations.</p>
+                    <a href="#" class="portfolio-link">View Project →</a>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image"><img src="https://static.resumegiants.com/wp-content/uploads/sites/25/2024/12/11131522/resumecoach_resumebuilder_jumbo-2-1040x994.webp" style="object-fit: cover; height: 100%;" alt=""></div>
+                <div class="portfolio-content">
+                    <h3>AI Resume Builder</h3>
+                    <p>An AI powered custom resume builder website with lots of options and AI enhancement features.</p>
+                    <a href="#" class="portfolio-link">View Project →</a>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image"><img src="https://www.geckoboard.com/uploads/SaaS-dashboard-example.png" style="object-fit: cover; height: 100%;" alt=""></div>
+                <div class="portfolio-content">
+                    <h3>SaaS Dashboard</h3>
+                    <p>Intuitive analytics dashboard with real-time data visualization and customizable widgets for business intelligence.</p>
+                    <a href="#" class="portfolio-link">View Project →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <div class="section-label">Get In Touch</div>
+            <h2 class="section-title">Let's Create Together</h2>
+        </div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <p>I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
+                <ul class="contact-details">
+                    <li>
+                        <strong>Email</strong>
+                        <a href="mailto:pawandhokane4200@gmail.com">pawandhokane4200@gmail.com</a>
+                    </li>
+                    <li>
+                        <strong>Phone</strong>
+                        <a href="tel:+15551234567">+91 8855997010</a>
+                    </li>
+                    <li>
+                        <strong>Location</strong>
+                        Mumbai , India
+                    </li>
+                </ul>
+                <a href="#" class="resume-download">Download Resume</a>
+            </div>
+            <div class="social-links">
+                <h3>Connect With Me</h3>
+                <div class="social-grid">
+                    <a href="#" class="social-item">
+                        
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="#" class="social-item">
+                       
+                        <span>GitHub</span>
+                    </a>
+                    <a href="#" class="social-item">
+                       
+                        <span>Twitter</span>
+                    </a>
+                    <a href="#" class="social-item">
+                       
+                        <span>Dribbble</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Pawan Dhokane. Designed & Developed with passion. All rights reserved.</p>
+    </footer>
+</body>
+</html>
